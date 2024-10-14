@@ -360,6 +360,7 @@
 "Assets/Script/MonsterMovement.cs"
 "Assets/Script/MonsterSpawner.cs"
 "Assets/Script/PauseMenu.cs"
+"Assets/Script/TowerCreate.cs"
 -langversion:9.0
 
 /deterministic
