@@ -277,6 +277,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   healthText: {fileID: 0}
+  heartImagePrefab: {fileID: 8211458124435631007, guid: c0e946014c8b83847932c2ee6a9816c6, type: 3}
+  heartContainer: {fileID: 0}
 --- !u!114 &4690544617034325372
 MonoBehaviour:
   m_ObjectHideFlags: 0
