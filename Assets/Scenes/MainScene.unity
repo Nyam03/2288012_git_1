@@ -150,7 +150,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e0d01d15278ace043bda49f7e8ee4ffd, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e524497656f91bd4db9a7990339d0709, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f74b4cf294c2bf440ae5b6eaab8b9159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossPrefab: {fileID: 6876546459756380068, guid: c47de12e246e4e048834e3bae959492a, type: 3}
+  bossPrefab: {fileID: 5607495174115380414, guid: 7aa81130bf13b7a4cba5fef74702d791, type: 3}
   spawnLocation: {fileID: 561432873}
   respawnTime: 600
 --- !u!1 &239954300

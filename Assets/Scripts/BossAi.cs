@@ -12,10 +12,10 @@ public class BossAi : MonoBehaviour
     public Transform[] waypoints;
     public bool isBoss;
     public float detectionRange = 15f;
-    public float attackRange = 5f;
-    public int attackDamage = 20;
-    public float attackCooldown = 2f;
-    public float rotationSpeed = 5f; // 회전 속도 조정
+    public float attackRange = 8f;
+    public int attackDamage = 15;
+    public float attackCooldown = 3f;
+    public float rotationSpeed = 4f; // 회전 속도 조정
 
     private GameObject player;
     private int m_CurrentWaypointIndex;
