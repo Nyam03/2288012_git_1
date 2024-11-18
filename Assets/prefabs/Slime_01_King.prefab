@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1380133795416493308}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Bone.003_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3396265118730310038}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 8379018913358544467}
   - component: {fileID: 5389242210877303196}
   - component: {fileID: 8436793099097873160}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Slime_01_King
   m_TagString: Slime
   m_Icon: {fileID: 0}
@@ -136,8 +136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 300
-  healthBarUI: {fileID: 2339017331632879844, guid: 8c66b53ca04d4e749a3109aa1f1299e6, type: 3}
-  player: {fileID: 616118809130393715, guid: d1afa8b009cdd7b4eb22cd3b024c0690, type: 3}
+  healthBarUI: {fileID: 0}
+  player: {fileID: 0}
   displayRange: 20
 --- !u!54 &8511427872333532628
 Rigidbody:
@@ -162,7 +162,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -245,7 +245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3797183032824981408}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Bone.003_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4350050263541578841}
   - component: {fileID: 7444541991198339894}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Slime_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +366,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9074292384728405522}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,7 +400,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 813691583223034642}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Bone.003_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5144619848102778083}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Bone.003_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -512,7 +512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7f9934f54349dc2489d80b0298740ae5, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

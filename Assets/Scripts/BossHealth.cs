@@ -7,7 +7,7 @@ public class BossHealth : MonoBehaviour
     public int maxHealth = 300;
     private int currentHealth;
 
-    public Slider healthBarUI;
+    public Slider healthBarUI; // 동적으로 연결될 체력바 UI
     public Transform player;
     public float displayRange = 20f;
 
@@ -18,8 +18,23 @@ public class BossHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         UpdateHealthBar();
-        healthBarUI.gameObject.SetActive(false);
+
+        if (healthBarUI != null)
+        {
+            healthBarUI.gameObject.SetActive(false); // 체력바 초기 비활성화
+        }
+
+        // 플레이어 자동 할당
+        if (player == null)
+        {
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player"); // "Player" 태그를 가진 오브젝트 찾기
+            if (playerObject != null)
+            {
+                player = playerObject.transform;
+            }
+        }
     }
+
 
     void Update()
     {
@@ -28,6 +43,11 @@ public class BossHealth : MonoBehaviour
 
     void CheckDisplayHealthBar()
     {
+        if (player == null || healthBarUI == null)
+        {
+            return;
+        }
+
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
         if (distanceToPlayer <= displayRange)
@@ -65,6 +85,9 @@ public class BossHealth : MonoBehaviour
         OnBossDeath?.Invoke();  // 보스가 죽었을 때 이벤트 호출
         Debug.Log("Boss Died");
         Destroy(gameObject);
-        healthBarUI.gameObject.SetActive(false);
+        if (healthBarUI != null)
+        {
+            Destroy(healthBarUI.gameObject);
+        }
     }
 }
