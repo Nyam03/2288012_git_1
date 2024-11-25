@@ -136,6 +136,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 300
+  coinPrefab: {fileID: 1516206009078322, guid: 4eca7a8ef879cfb41b294a8c0d69ea58, type: 3}
+  coinCount: 10
+  vehiclePrefab: {fileID: 100008, guid: f33fcdf90e7034971b3e1a639b7b0355, type: 3}
+  vehicleSpawnPoint: {fileID: 0}
   healthBarUI: {fileID: 0}
   player: {fileID: 0}
   displayRange: 20

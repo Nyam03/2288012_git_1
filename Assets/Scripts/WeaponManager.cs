@@ -121,7 +121,9 @@ public class WeaponManager : MonoBehaviour
     {
         if (attackEffectPrefab != null && effectSpawnPoint != null)
         {
-            Instantiate(attackEffectPrefab, effectSpawnPoint.position, effectSpawnPoint.rotation);
+            // 이펙트를 생성하고 일정 시간 후에 삭제
+            GameObject effect = Instantiate(attackEffectPrefab, effectSpawnPoint.position, effectSpawnPoint.rotation);
+            Destroy(effect, 0.3f);
         }
     }
 

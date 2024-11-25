@@ -16,6 +16,16 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthUI();            // 초기 UI 업데이트
     }
 
+    public void Heal(int amount)
+    {
+        currentHealth += amount;    // 회복량만큼 체력 증가
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth; // 최대 체력을 초과하지 않도록 제한
+        }
+        UpdateHealthUI();            // 체력 변경 시 UI 업데이트
+    }
+
     // 체력 감소 함수
     public void TakeDamage(int damage)
     {

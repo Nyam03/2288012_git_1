@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
@@ -6,6 +8,13 @@ public class BossHealth : MonoBehaviour
 {
     public int maxHealth = 300;
     private int currentHealth;
+
+    public GameObject coinPrefab;
+    public int coinCount = 10;
+
+    public GameObject vehiclePrefab;
+    public Transform vehicleSpawnPoint;
+    private static bool isMountSpawned = false;
 
     public Slider healthBarUI; // 동적으로 연결될 체력바 UI
     public Transform player;
@@ -33,8 +42,16 @@ public class BossHealth : MonoBehaviour
                 player = playerObject.transform;
             }
         }
-    }
 
+        if (vehicleSpawnPoint == null)
+        {
+            GameObject spawnPointObject = GameObject.Find("VehicleSpawn"); // "VehicleSpawn" 이름으로 검색
+            if (spawnPointObject != null)
+            {
+                vehicleSpawnPoint = spawnPointObject.transform;
+            }
+        }
+    }
 
     void Update()
     {
@@ -87,6 +104,16 @@ public class BossHealth : MonoBehaviour
         Destroy(gameObject);
         if (healthBarUI != null)
         {
+            for (int i = 0; i < coinCount; i++)
+            {
+                Vector3 coinPosition = transform.position + new Vector3(0, 1f, 0);
+                Instantiate(coinPrefab, coinPosition, Quaternion.identity);
+            }
+            if (!isMountSpawned && vehiclePrefab != null && vehicleSpawnPoint != null)
+            {
+                Instantiate(vehiclePrefab, vehicleSpawnPoint.position, vehicleSpawnPoint.rotation);
+                isMountSpawned = true;
+            }
             Destroy(healthBarUI.gameObject);
         }
     }
