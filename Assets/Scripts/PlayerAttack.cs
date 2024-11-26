@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public int attackDamage = 10;
     public float attackRange = 2f; //공격 범위
     public LayerMask enemyLayers;
     public LayerMask bossLayers;
     public float attackCooldown = 1f; // 공격 쿨다운
     private float lastAttackTime = 0f; // 마지막 공격 시간
+    private WeaponManager weaponManager;
+
+    void Start()
+    {
+        weaponManager = FindObjectOfType<WeaponManager>();
+    }
 
     void Update()
     {
@@ -32,11 +37,13 @@ public class PlayerAttack : MonoBehaviour
     {
         lastAttackTime = Time.time;
 
-        //범위 내 적을 찾음
+        int attackDamage = GetWeaponDamage(); // 현재 무기 데미지 가져오기
+
+        // 범위 내 적을 찾음
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange, enemyLayers);
         Collider[] hitBoss = Physics.OverlapSphere(transform.position, attackRange, bossLayers);
 
-        //슬라임 공격
+        // 슬라임 공격
         foreach (Collider enemy in hitEnemies)
         {
             SlimeHealth enemyHealth = enemy.GetComponent<SlimeHealth>();
@@ -53,5 +60,15 @@ public class PlayerAttack : MonoBehaviour
                 bossHealth.TakeDamage(attackDamage);
             }
         }
+    }
+
+    int GetWeaponDamage()
+    {
+        // WeaponManager의 현재 무기 데미지를 반환
+        if (weaponManager != null && weaponManager.weapons.Count > weaponManager.currentWeaponIndex)
+        {
+            return weaponManager.weapons[weaponManager.currentWeaponIndex].damage;
+        }
+        return 10; // 기본 데미지
     }
 }

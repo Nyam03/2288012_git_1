@@ -106,7 +106,7 @@ public class BossHealth : MonoBehaviour
         {
             for (int i = 0; i < coinCount; i++)
             {
-                Vector3 coinPosition = transform.position + new Vector3(0, 1f, 0);
+                Vector3 coinPosition = transform.position + new Vector3(0, 1.5f, 0);
                 Instantiate(coinPrefab, coinPosition, Quaternion.identity);
             }
             if (!isMountSpawned && vehiclePrefab != null && vehicleSpawnPoint != null)

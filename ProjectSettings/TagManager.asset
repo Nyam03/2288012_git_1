@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Slime
   - Coin
+  - Mount
   layers:
   - Default
   - TransparentFX
