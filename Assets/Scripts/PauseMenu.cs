@@ -6,10 +6,23 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject PausePanel;
+    public GameObject DeathPanel;
 
     private bool isPaused = false;
 
-    // Update is called once per frame
+    void Start()
+    {
+        if (PausePanel != null)
+        {
+            PausePanel.SetActive(false);
+        }
+
+        if (DeathPanel != null)
+        {
+            DeathPanel.SetActive(false);
+        }
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -41,6 +54,23 @@ public class PauseMenu : MonoBehaviour
         isPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    public void ShowDeathUI()
+    {
+        if (DeathPanel != null)
+        {
+            DeathPanel.SetActive(true);
+        }
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void Respawn()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
     }
 
     public void QuitMain()

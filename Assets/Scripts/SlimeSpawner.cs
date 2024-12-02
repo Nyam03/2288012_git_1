@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class SlimeSpawner : MonoBehaviour
 {
     public GameObject[] slimePrefabs; // 슬라임 프리팹 배열
-    public int slimeCount = 100;    // 슬라임 수
+    public int slimeCount = 100;
     public float spawnRadius = 300f; // 소환할 범위
     public Transform mapCenter;   // 맵의 중심
     public float minY = 18f;      // 슬라임 최소 Y 좌표
@@ -39,7 +39,7 @@ public class SlimeSpawner : MonoBehaviour
             }
             else
             {
-                // 만약 NavMesh 표면을 찾지 못했다면 해당 슬라임 소환을 생략 (필요시 처리)
+                // NavMesh를 찾지 못했다면 슬라임 소환 생략
                 Debug.LogWarning("NavMesh 못찾음");
                 continue;
             }
@@ -51,7 +51,7 @@ public class SlimeSpawner : MonoBehaviour
             // 슬라임 소환
             GameObject slime = Instantiate(selectedSlimePrefab, randomPosition, Quaternion.identity);
 
-            // 슬라임의 Waypoints 설정 (필요시)
+            // 슬라임의 Waypoints 설정
             EnemyAi enemyAi = slime.GetComponent<EnemyAi>();
             if (enemyAi != null)
             {

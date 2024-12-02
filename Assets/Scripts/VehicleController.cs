@@ -17,6 +17,12 @@ public class VehicleController : MonoBehaviour
     public Transform rearLeftTransform;
     public Transform rearRightTransform;
 
+    void Start()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = new Vector3(0, -0.5f, 0); // 무게 중심을 차량 아래로 이동
+    }
+
     void FixedUpdate()
     {
         // 입력 받기

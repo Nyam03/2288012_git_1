@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SlimeAttack : MonoBehaviour
 {
-    public int attackDamage = 5;  //데미지
-    public float attackCooldown = 1f; //공격 딜레이
+    public int attackDamage = 5;
+    public float attackCooldown = 1f;
     private float lastAttackTime = 0f;
 
     void OnCollisionEnter(Collision collision)

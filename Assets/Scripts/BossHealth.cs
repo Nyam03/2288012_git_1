@@ -16,7 +16,7 @@ public class BossHealth : MonoBehaviour
     public Transform vehicleSpawnPoint;
     private static bool isMountSpawned = false;
 
-    public Slider healthBarUI; // 동적으로 연결될 체력바 UI
+    public Slider healthBarUI;
     public Transform player;
     public float displayRange = 20f;
 
@@ -30,13 +30,12 @@ public class BossHealth : MonoBehaviour
 
         if (healthBarUI != null)
         {
-            healthBarUI.gameObject.SetActive(false); // 체력바 초기 비활성화
+            healthBarUI.gameObject.SetActive(false);
         }
 
-        // 플레이어 자동 할당
         if (player == null)
         {
-            GameObject playerObject = GameObject.FindGameObjectWithTag("Player"); // "Player" 태그를 가진 오브젝트 찾기
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             if (playerObject != null)
             {
                 player = playerObject.transform;
@@ -45,7 +44,7 @@ public class BossHealth : MonoBehaviour
 
         if (vehicleSpawnPoint == null)
         {
-            GameObject spawnPointObject = GameObject.Find("VehicleSpawn"); // "VehicleSpawn" 이름으로 검색
+            GameObject spawnPointObject = GameObject.Find("VehicleSpawn");
             if (spawnPointObject != null)
             {
                 vehicleSpawnPoint = spawnPointObject.transform;
@@ -101,20 +100,24 @@ public class BossHealth : MonoBehaviour
     {
         OnBossDeath?.Invoke();  // 보스가 죽었을 때 이벤트 호출
         Debug.Log("Boss Died");
-        Destroy(gameObject);
-        if (healthBarUI != null)
+
+        // 차량 생성
+        if (!isMountSpawned && vehiclePrefab != null && vehicleSpawnPoint != null)
         {
-            for (int i = 0; i < coinCount; i++)
+            GameObject spawnedVehicle = Instantiate(vehiclePrefab, vehicleSpawnPoint.position, vehicleSpawnPoint.rotation);
+            isMountSpawned = true;
+
+            VehicleInteraction vehicleInteraction = FindObjectOfType<VehicleInteraction>();
+            if (vehicleInteraction != null)
             {
-                Vector3 coinPosition = transform.position + new Vector3(0, 1.5f, 0);
-                Instantiate(coinPrefab, coinPosition, Quaternion.identity);
+                vehicleInteraction.SpawnVehicle(spawnedVehicle); // 차량 연결
+                Debug.Log("Vehicle spawned and assigned to VehicleInteraction.");
             }
-            if (!isMountSpawned && vehiclePrefab != null && vehicleSpawnPoint != null)
+            else
             {
-                Instantiate(vehiclePrefab, vehicleSpawnPoint.position, vehicleSpawnPoint.rotation);
-                isMountSpawned = true;
+                Debug.LogError("VehicleInteraction script not found in the scene.");
             }
-            Destroy(healthBarUI.gameObject);
         }
+        Destroy(gameObject);
     }
 }

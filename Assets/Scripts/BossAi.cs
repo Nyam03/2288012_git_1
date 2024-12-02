@@ -15,7 +15,7 @@ public class BossAi : MonoBehaviour
     public float attackRange = 8f;
     public int attackDamage = 15;
     public float attackCooldown = 3f;
-    public float rotationSpeed = 4f; // 회전 속도 조정
+    public float rotationSpeed = 4f;
 
     private GameObject player;
     private int m_CurrentWaypointIndex;
@@ -64,7 +64,7 @@ public class BossAi : MonoBehaviour
 
         if (distanceToPlayer <= detectionRange)
         {
-            LookAtPlayer(); // 플레이어를 바라보도록 설정
+            LookAtPlayer();
 
             if (distanceToPlayer <= attackRange)
             {

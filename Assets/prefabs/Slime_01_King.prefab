@@ -138,7 +138,7 @@ MonoBehaviour:
   maxHealth: 300
   coinPrefab: {fileID: 1516206009078322, guid: 4eca7a8ef879cfb41b294a8c0d69ea58, type: 3}
   coinCount: 10
-  vehiclePrefab: {fileID: 100008, guid: f33fcdf90e7034971b3e1a639b7b0355, type: 3}
+  vehiclePrefab: {fileID: 9177918493995340192, guid: 8f1d8e781586bc74ab4065c57808d5b7, type: 3}
   vehicleSpawnPoint: {fileID: 0}
   healthBarUI: {fileID: 0}
   player: {fileID: 0}

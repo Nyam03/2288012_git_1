@@ -5,52 +5,57 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 100;       // 최대 체력
-    private int currentHealth;        // 현재 체력
+    public int maxHealth = 100;
+    private int currentHealth;
 
-    public Text healthText;           // 체력 표시를 위한 UI 텍스트
+    public Text healthText;
+
+    private PauseMenu pauseMenu;
 
     void Start()
     {
-        currentHealth = maxHealth;   // 시작할 때 최대 체력으로 초기화
-        UpdateHealthUI();            // 초기 UI 업데이트
+        currentHealth = maxHealth;
+        UpdateHealthUI();
+
+        pauseMenu = FindObjectOfType<PauseMenu>();
     }
 
     public void Heal(int amount)
     {
-        currentHealth += amount;    // 회복량만큼 체력 증가
+        currentHealth += amount;
         if (currentHealth > maxHealth)
         {
-            currentHealth = maxHealth; // 최대 체력을 초과하지 않도록 제한
+            currentHealth = maxHealth;
         }
-        UpdateHealthUI();            // 체력 변경 시 UI 업데이트
+        UpdateHealthUI();
     }
 
-    // 체력 감소 함수
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;    // 데미지만큼 체력 감소
+        currentHealth -= damage;
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            Die();                  // 체력이 0 이하일 때 죽음 처리
+            Die();
         }
-        UpdateHealthUI();            // 체력 변경 시 UI 업데이트
+        UpdateHealthUI();
     }
 
-    // 체력 UI 텍스트 업데이트 함수
     void UpdateHealthUI()
     {
         if (healthText != null)
         {
-            healthText.text = currentHealth.ToString();  // 텍스트에 현재 체력 반영
+            healthText.text = currentHealth.ToString();
         }
     }
 
-    // 캐릭터가 죽었을 때 처리
     void Die()
     {
         Debug.Log(gameObject.name + " died!");
-        Destroy(gameObject);  // 오브젝트 삭제 또는 비활성화
+
+        if (pauseMenu != null)
+        {
+            pauseMenu.ShowDeathUI();
+        }
     }
 }

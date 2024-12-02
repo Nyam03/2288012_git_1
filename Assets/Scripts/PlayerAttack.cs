@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public float attackRange = 2f; //공격 범위
+    public float attackRange = 2f;
     public LayerMask enemyLayers;
     public LayerMask bossLayers;
-    public float attackCooldown = 1f; // 공격 쿨다운
-    private float lastAttackTime = 0f; // 마지막 공격 시간
+    public float attackCooldown = 1f;
+    private float lastAttackTime = 0f;
     private WeaponManager weaponManager;
 
     void Start()
@@ -29,7 +29,6 @@ public class PlayerAttack : MonoBehaviour
 
     bool CanAttack()
     {
-        // 현재 시간이 마지막 공격 시간 + 쿨다운 이후인지 확인
         return Time.time >= lastAttackTime + attackCooldown;
     }
 
@@ -37,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
     {
         lastAttackTime = Time.time;
 
-        int attackDamage = GetWeaponDamage(); // 현재 무기 데미지 가져오기
+        int attackDamage = GetWeaponDamage();
 
         // 범위 내 적을 찾음
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange, enemyLayers);
@@ -64,11 +63,11 @@ public class PlayerAttack : MonoBehaviour
 
     int GetWeaponDamage()
     {
-        // WeaponManager의 현재 무기 데미지를 반환
+        // 현재 무기 데미지 반환
         if (weaponManager != null && weaponManager.weapons.Count > weaponManager.currentWeaponIndex)
         {
             return weaponManager.weapons[weaponManager.currentWeaponIndex].damage;
         }
-        return 10; // 기본 데미지
+        return 10;
     }
 }
