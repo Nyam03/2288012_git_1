@@ -95,7 +95,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 617, y: 63, z: 490}
-  m_LocalScale: {x: 15, y: 15, z: 15}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3396265118730310038}
@@ -138,7 +138,7 @@ MonoBehaviour:
   maxHealth: 300
   coinPrefab: {fileID: 1516206009078322, guid: 4eca7a8ef879cfb41b294a8c0d69ea58, type: 3}
   coinCount: 10
-  vehiclePrefab: {fileID: 9177918493995340192, guid: 8f1d8e781586bc74ab4065c57808d5b7, type: 3}
+  vehiclePrefab: {fileID: 6373020875453028415, guid: 37209342075ed604bb6c976c494cde22, type: 3}
   vehicleSpawnPoint: {fileID: 0}
   healthBarUI: {fileID: 0}
   player: {fileID: 0}
@@ -189,7 +189,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.33555502
+  m_Radius: 0.4
   m_Height: 0.67111003
   m_Direction: 1
   m_Center: {x: -0.0048990888, y: 0.31553003, z: 0.005013021}
@@ -214,7 +214,7 @@ MonoBehaviour:
   isBoss: 1
   detectionRange: 15
   attackRange: 8
-  attackDamage: 15
+  attackDamage: 20
   attackCooldown: 3
   rotationSpeed: 4
   damType: 0

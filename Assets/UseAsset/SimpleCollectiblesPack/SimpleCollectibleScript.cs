@@ -10,10 +10,6 @@ public class SimpleCollectibleScript : MonoBehaviour
 
 	public float rotationSpeed;
 
-	public AudioClip collectSound;
-
-	public GameObject collectEffect;
-
 	// Use this for initialization
 	void Start () 
 	{
@@ -39,10 +35,6 @@ public class SimpleCollectibleScript : MonoBehaviour
 
 	public void Collect()
 	{
-		if(collectSound)
-			AudioSource.PlayClipAtPoint(collectSound, transform.position);
-		if(collectEffect)
-			Instantiate(collectEffect, transform.position, Quaternion.identity);
 		Destroy (gameObject);
 	}
 }

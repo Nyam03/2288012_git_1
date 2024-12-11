@@ -50,6 +50,11 @@ public class BossHealth : MonoBehaviour
                 vehicleSpawnPoint = spawnPointObject.transform;
             }
         }
+
+        if (!IsSceneRestarted())
+        {
+            isMountSpawned = false;
+        }
     }
 
     void Update()
@@ -66,7 +71,7 @@ public class BossHealth : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
-        if (distanceToPlayer <= displayRange)
+        if (distanceToPlayer <= displayRange && currentHealth > 0)
         {
             healthBarUI.gameObject.SetActive(true);
         }
@@ -98,6 +103,11 @@ public class BossHealth : MonoBehaviour
 
     void Die()
     {
+        if (healthBarUI != null)
+        {
+            healthBarUI.gameObject.SetActive(false);
+        }
+
         OnBossDeath?.Invoke();  // 보스가 죽었을 때 이벤트 호출
         Debug.Log("Boss Died");
 
@@ -119,5 +129,10 @@ public class BossHealth : MonoBehaviour
             }
         }
         Destroy(gameObject);
+    }
+
+    bool IsSceneRestarted()
+    {
+        return Time.timeSinceLevelLoad < 1f; // 씬 시작 1초 이내일 경우
     }
 }

@@ -22,6 +22,15 @@ public class VehicleInteraction : MonoBehaviour
         {
             playerCamera = Camera.main;
         }
+
+        if (vehicleCamera != null)
+        {
+            AudioListener vehicleAudioListener = vehicleCamera.GetComponent<AudioListener>();
+            if (vehicleAudioListener != null)
+            {
+                vehicleAudioListener.enabled = false;
+            }
+        }
     }
 
     void Update()
@@ -44,6 +53,11 @@ public class VehicleInteraction : MonoBehaviour
         if (vehicleCamera != null)
         {
             vehicleCamera.enabled = false;
+            AudioListener vehicleAudioListener = vehicleCamera.GetComponent<AudioListener>();
+            if (vehicleAudioListener != null)
+            {
+                vehicleAudioListener.enabled = false;
+            }
         }
 
         PrometeoCarController carController = vehicle.GetComponent<PrometeoCarController>();
@@ -51,27 +65,47 @@ public class VehicleInteraction : MonoBehaviour
         {
             carController.enabled = false;
         }
+
+        VehicleSoundManager soundManager = vehicle.GetComponent<VehicleSoundManager>();
+        if (soundManager != null)
+        {
+            AudioClip engineClip = Resources.Load<AudioClip>("Sounds/EngineSound");
+
+            soundManager.SetAudioClips(engineClip);
+        }
     }
 
     bool IsNearVehicle()
     {
         if (vehicle == null || player == null) return false;
 
-        // 플레이어와 차량 간 거리 확인
+        // 차량 근처 3m 이내, 탑승 중이면 true
         float distance = Vector3.Distance(player.transform.position, vehicle.transform.position);
-        return distance < 3f; // 3 미터 이내일 때만 F 키로 탑승 가능
+        return isInVehicle || distance < 3f;
     }
 
     void ToggleVehicleState()
     {
         isInVehicle = !isInVehicle;
+        VehicleSoundManager soundManager = vehicle.GetComponent<VehicleSoundManager>();
 
         if (isInVehicle)
         {
             // 차량 탑승 상태
             player.SetActive(false);
             playerCamera.enabled = false;
-            if (vehicleCamera != null) vehicleCamera.enabled = true;
+
+            if (vehicleCamera != null)
+            {
+                vehicleCamera.enabled = true;
+                AudioListener vehicleAudioListener = vehicleCamera.GetComponent<AudioListener>();
+                if (vehicleAudioListener != null)
+                {
+                    vehicleAudioListener.enabled = true; // 차량 카메라의 Audio Listener 활성화
+                }
+            }
+
+            soundManager?.SetVehicleState(true);
 
             PrometeoCarController carController = vehicle.GetComponent<PrometeoCarController>();
             if (carController != null)
@@ -87,7 +121,18 @@ public class VehicleInteraction : MonoBehaviour
 
             player.SetActive(true);
             playerCamera.enabled = true;
-            if (vehicleCamera != null) vehicleCamera.enabled = false;
+
+            if (vehicleCamera != null)
+            {
+                vehicleCamera.enabled = false;
+                AudioListener vehicleAudioListener = vehicleCamera.GetComponent<AudioListener>();
+                if (vehicleAudioListener != null)
+                {
+                    vehicleAudioListener.enabled = false; // 차량 카메라의 Audio Listener 비활성화
+                }
+            }
+
+            soundManager?.SetVehicleState(false);
 
             PrometeoCarController carController = vehicle.GetComponent<PrometeoCarController>();
             if (carController != null)
