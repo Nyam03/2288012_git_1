@@ -14,9 +14,12 @@ public class EnemyAi : MonoBehaviour
     public Transform[] waypoints;
     public int damType;
 
-    private int m_CurrentWaypointIndex;
+    public AudioSource walkSound;
 
-    private bool move;
+    private int m_CurrentWaypointIndex;
+    private bool isWalking = false;
+
+    //private bool move;
     private Material faceMaterial;
     private Vector3 originPos;
 
@@ -46,8 +49,6 @@ public class EnemyAi : MonoBehaviour
     }
     void Update()
     {
-        
-
         switch (currentState)
         {
             case SlimeAnimationState.Idle:
@@ -55,6 +56,7 @@ public class EnemyAi : MonoBehaviour
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) return;
                 StopAgent();
                 SetFace(faces.Idleface);
+                StopWalkSound();
                 break;
 
             case SlimeAnimationState.Walk:
@@ -100,8 +102,7 @@ public class EnemyAi : MonoBehaviour
                 }
                 // set Speed parameter synchronized with agent root motion moverment
                 animator.SetFloat("Speed", agent.velocity.magnitude);
-                
-
+                PlayWalkSound();
                 break;
 
             case SlimeAnimationState.Jump:
@@ -111,7 +112,7 @@ public class EnemyAi : MonoBehaviour
                 StopAgent();
                 SetFace(faces.jumpFace);
                 animator.SetTrigger("Jump");
-
+                StopWalkSound();
                 //Debug.Log("Jumping");
                 break;
 
@@ -121,8 +122,8 @@ public class EnemyAi : MonoBehaviour
                 StopAgent();
                 SetFace(faces.attackFace);
                 animator.SetTrigger("Attack");
-
-               // Debug.Log("Attacking");
+                StopWalkSound();
+                // Debug.Log("Attacking");
 
                 break;
             case SlimeAnimationState.Damage:
@@ -136,7 +137,7 @@ public class EnemyAi : MonoBehaviour
                 animator.SetTrigger("Damage");
                 animator.SetInteger("DamageType", damType);
                 SetFace(faces.damageFace);
-
+                StopWalkSound();
                 //Debug.Log("Take Damage");
                 break;
        
@@ -144,6 +145,23 @@ public class EnemyAi : MonoBehaviour
 
     }
 
+    void PlayWalkSound()
+    {
+        if (walkSound != null && !isWalking)
+        {
+            walkSound.Play();
+            isWalking = true;
+        }
+    }
+
+    void StopWalkSound()
+    {
+        if (walkSound != null && isWalking)
+        {
+            walkSound.Stop();
+            isWalking = false;
+        }
+    }
 
     private void StopAgent()
     {
@@ -190,4 +208,4 @@ public class EnemyAi : MonoBehaviour
         transform.position = position;
         agent.nextPosition = transform.position;
     }
-    }
+}

@@ -207,6 +207,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faces: {fileID: 11400000, guid: 8b8a7554fceb39841840f45a2d8da540, type: 2}
   SmileBody: {fileID: 6642340768684784807}
+  audioSource: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 4434bf7965f28604eacd403e67412f48, type: 3}
   currentState: 0
   animator: {fileID: 2895992676699517178}
   agent: {fileID: 8436793099097873160}

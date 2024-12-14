@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: 8079227087265162588}
   m_Layer: 0
   m_Name: Car
-  m_TagString: Untagged
+  m_TagString: Vehicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -759,7 +759,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultEngineClip: {fileID: 8300000, guid: 5e54aafd36999bb4894edfaae002f89f, type: 3}
-  defaultTireScreechClip: {fileID: 8300000, guid: 6dbc84d8cda0dd248b8cf2de1a040821, type: 3}
 --- !u!1 &6981717801100071436
 GameObject:
   m_ObjectHideFlags: 0

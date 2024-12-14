@@ -114,18 +114,20 @@ public class BossHealth : MonoBehaviour
         // 차량 생성
         if (!isMountSpawned && vehiclePrefab != null && vehicleSpawnPoint != null)
         {
-            GameObject spawnedVehicle = Instantiate(vehiclePrefab, vehicleSpawnPoint.position, vehicleSpawnPoint.rotation);
-            isMountSpawned = true;
-
-            VehicleInteraction vehicleInteraction = FindObjectOfType<VehicleInteraction>();
-            if (vehicleInteraction != null)
+            if (GameObject.FindWithTag("Vehicle") == null) // "Vehicle" 태그를 사용하여 차량 검색
             {
-                vehicleInteraction.SpawnVehicle(spawnedVehicle); // 차량 연결
-                Debug.Log("Vehicle spawned and assigned to VehicleInteraction.");
+                GameObject spawnedVehicle = Instantiate(vehiclePrefab, vehicleSpawnPoint.position, vehicleSpawnPoint.rotation);
+                isMountSpawned = true;
+
+                VehicleInteraction vehicleInteraction = FindObjectOfType<VehicleInteraction>();
+                if (vehicleInteraction != null)
+                {
+                    vehicleInteraction.SpawnVehicle(spawnedVehicle); // 차량 연결
+                }
             }
             else
             {
-                Debug.LogError("VehicleInteraction script not found in the scene.");
+                Debug.Log("차량이 존재함");
             }
         }
         Destroy(gameObject);

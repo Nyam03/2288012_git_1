@@ -5,6 +5,8 @@ public class BossAi : MonoBehaviour
 {
     public Face faces;
     public GameObject SmileBody;
+    public AudioSource audioSource;
+    public AudioClip attackSound;
     public SlimeAnimationState currentState;
 
     public Animator animator;
@@ -34,16 +36,25 @@ public class BossAi : MonoBehaviour
         faceMaterial = SmileBody.GetComponent<Renderer>().materials[1];
         player = GameObject.FindGameObjectWithTag("Player");
 
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>(); // AudioSource 동적 추가
+        }
+        audioSource.playOnAwake = false;
+        audioSource.volume = 0.1f;
+
+        /*
         if (!isBoss && waypoints.Length > 0)
         {
             walkType = WalkType.Patroll;
-            WalkToNextDestination();
+            //WalkToNextDestination();
         }
         else
         {
             currentState = SlimeAnimationState.Idle;
             agent.isStopped = true;
         }
+        */
     }
 
     void Update()
@@ -54,10 +65,11 @@ public class BossAi : MonoBehaviour
         }
         else
         {
-            HandlePatrol();
+            //HandlePatrol();
         }
     }
 
+    // 플레이어 탐지, 공격 
     void DetectAndAttackPlayer()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
@@ -90,6 +102,16 @@ public class BossAi : MonoBehaviour
             {
                 playerHealth.TakeDamage(attackDamage);
             }
+            PlayAttackSound();
+        }
+    }
+
+    void PlayAttackSound()
+    {
+        if (audioSource != null && attackSound != null)
+        {
+            audioSource.clip = attackSound;
+            audioSource.Play();
         }
     }
 
@@ -101,6 +123,7 @@ public class BossAi : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
 
+    /*
     void HandlePatrol()
     {
         if (waypoints.Length == 0) return;
@@ -129,12 +152,15 @@ public class BossAi : MonoBehaviour
         agent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
     }
 
+    // 이동 중지
     private void StopAgent()
     {
         agent.isStopped = true;
         animator.SetFloat("Speed", 0);
     }
+    */
 
+    // 애니메이션 종료 이벤트
     public void AlertObservers(string message)
     {
         if (message.Equals("AnimationAttackEnded"))

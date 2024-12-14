@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
     public LayerMask bossLayers;
     public float attackCooldown = 1f;
     private float lastAttackTime = 0f;
+    public AudioSource audioSource;
     private WeaponManager weaponManager;
 
     void Start()
@@ -59,6 +60,7 @@ public class PlayerAttack : MonoBehaviour
                 bossHealth.TakeDamage(attackDamage);
             }
         }
+        PlayAttackSound();
     }
 
     int GetWeaponDamage()
@@ -69,5 +71,10 @@ public class PlayerAttack : MonoBehaviour
             return weaponManager.weapons[weaponManager.currentWeaponIndex].damage;
         }
         return 10;
+    }
+
+    void PlayAttackSound()
+    {
+        audioSource.Play();
     }
 }

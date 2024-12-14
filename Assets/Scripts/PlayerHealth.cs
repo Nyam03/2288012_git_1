@@ -10,13 +10,20 @@ public class PlayerHealth : MonoBehaviour
 
     public Text healthText;
 
+    public AudioClip damageSound;
+    public Image damageFlashImage;
+    public float flashDuration = 0.1f;
+    private AudioSource audioSource;
+
     private PauseMenu pauseMenu;
 
     void Start()
     {
         currentHealth = maxHealth;
         UpdateHealthUI();
-
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.volume = 0.1f;
         pauseMenu = FindObjectOfType<PauseMenu>();
     }
 
@@ -39,6 +46,9 @@ public class PlayerHealth : MonoBehaviour
             Die();
         }
         UpdateHealthUI();
+
+        PlayDamageSound();
+        StartCoroutine(FlashDamageEffect());
     }
 
     void UpdateHealthUI()
@@ -56,6 +66,25 @@ public class PlayerHealth : MonoBehaviour
         if (pauseMenu != null)
         {
             pauseMenu.ShowDeathUI();
+        }
+    }
+
+    void PlayDamageSound()
+    {
+        if (damageSound != null && audioSource != null)
+        {
+            audioSource.clip = damageSound;
+            audioSource.Play();
+        }
+    }
+
+    IEnumerator FlashDamageEffect()
+    {
+        if (damageFlashImage != null)
+        {
+            damageFlashImage.color = new Color(1, 0, 0, 0.2f); // 빨간색
+            yield return new WaitForSeconds(flashDuration);
+            damageFlashImage.color = new Color(1, 0, 0, 0); // 투명하게
         }
     }
 }
